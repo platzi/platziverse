@@ -1,0 +1,22 @@
+{
+  "name": "platziverse-db",
+  "version": "1.0.0",
+  "description": "A Simple IoT Platform - DB Module",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platzi/platziverse.git"
+  },
+  "author": "Julian Duque <julianduquej@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/platzi/platziverse/issues"
+  },
+  "homepage": "https://github.com/platzi/platziverse#readme",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}

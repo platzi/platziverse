@@ -2,8 +2,29 @@
 
 const debug = require('debug')('platziverse:api:routes')
 const express = require('express')
+const asyncify = require('express-asyncify')
+const db = require('platziverse-db')
 
-const api = express.Router()
+const config = require('./config')
+
+const api = asyncify(express.Router())
+
+let services, Agent, Metric
+
+api.use('*', async (req, res, next) => {
+  if (!services) {
+    debug('Connecting to database')
+    try {
+      services = await db(config.db)
+    } catch (e) {
+      return next(e)
+    }
+
+    Agent = services.Agent
+    Metric = services.Metric
+  }
+  next()
+})
 
 api.get('/agents', (req, res) => {
   debug('A request has come to /agents')

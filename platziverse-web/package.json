@@ -1,0 +1,30 @@
+{
+  "name": "platziverse-web",
+  "version": "1.0.0",
+  "description": "A Simple IoT Platform - Web Dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "start-dev": "DEBUG=platziverse:* nodemon server.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platzi/platziverse.git"
+  },
+  "author": "Julian Duque <julianduquej@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/platzi/platziverse/issues"
+  },
+  "homepage": "https://github.com/platzi/platziverse#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "debug": "^3.0.0",
+    "express": "^4.15.4"
+  }
+}

@@ -69,6 +69,21 @@ module.exports = {
       }
 
       this.metrics = metrics;
+
+      this.startRealtime();
+    },
+    startRealtime: function startRealtime() {
+      var _this = this;
+
+      var uuid = this.uuid,
+          socket = this.socket;
+
+
+      socket.on('agent/disconnected', function (payload) {
+        if (payload.agent.uuid === uuid) {
+          _this.connected = false;
+        }
+      });
     },
     toggleMetrics: function toggleMetrics() {
       this.showMetrics = this.showMetrics ? false : true;
@@ -116,6 +131,7 @@ var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n
 ;(function(){
 'use strict';
 
+var request = require('request-promise-native');
 var io = require('socket.io-client');
 var socket = io();
 
@@ -133,14 +149,43 @@ module.exports = {
 
 
   methods: {
-    initialize: function initialize() {}
+    initialize: async function initialize() {
+      var _this = this;
+
+      var options = {
+        method: 'GET',
+        url: 'http://localhost:8080/agents',
+        json: true
+      };
+
+      var result = void 0;
+      try {
+        result = await request(options);
+      } catch (e) {
+        this.error = e.error.error;
+        return;
+      }
+
+      this.agents = result;
+
+      socket.on('agent/connected', function (payload) {
+        var uuid = payload.agent.uuid;
+
+        var existing = _this.agents.find(function (a) {
+          return a.uuid === uuid;
+        });
+        if (!existing) {
+          _this.agents.push(payload.agent);
+        }
+      });
+    }
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('agent',{attrs:{"uuid":"936afcc8-9591-44b9-bbff-650870b0091c","socket":_vm.socket}}),_vm._v(" "),_vm._l((_vm.agents),function(agent){return _c('agent',{key:agent.uuid,attrs:{"uuid":agent.uuid}})}),_vm._v(" "),(_vm.error)?_c('p',[_vm._v(_vm._s(_vm.error))]):_vm._e()],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._l((_vm.agents),function(agent){return _c('agent',{key:agent.uuid,attrs:{"uuid":agent.uuid,"socket":_vm.socket}})}),_vm._v(" "),(_vm.error)?_c('p',[_vm._v(_vm._s(_vm.error))]):_vm._e()],2)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -153,7 +198,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-03ee0e4a", __vue__options__)
   }
 })()}
-},{"socket.io-client":401,"vue":468,"vue-hot-reload-api":467,"vueify/lib/insert-css":469}],4:[function(require,module,exports){
+},{"request-promise-native":368,"socket.io-client":401,"vue":468,"vue-hot-reload-api":467,"vueify/lib/insert-css":469}],4:[function(require,module,exports){
 'use strict';
 
 var _require = require('vue-chartjs'),

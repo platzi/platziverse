@@ -1,0 +1,23 @@
+{
+  "name": "platziverse-cli",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Simple IoT Platform - CLI",
+  "bin": "platziverse.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platzi/platziverse.git"
+  },
+  "author": "Julian Duque <julianduquej@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/platzi/platziverse/issues"
+  },
+  "homepage": "https://github.com/platzi/platziverse#readme",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}

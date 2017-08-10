@@ -9,6 +9,7 @@
         <h3 class="metrics-title">Metrics</h3>
         <metric
           :uuid="uuid"
+          :socket="socket"
           v-for="metric in metrics"
           v-bind:type="metric.type"
           v-bind:key="metric.type"
@@ -73,15 +74,17 @@
 </style>
 
 <script>
+const request = require('request-promise-native')
 
 module.exports = {
-  props: [ 'uuid' ],
+  props: [ 'uuid', 'socket' ],
 
   data() {
     return {
       name: null,
       hostname: null,
       connected: false,
+      pid: null,
       showMetrics: false,
       error: null,
       metrics: []
@@ -93,7 +96,49 @@ module.exports = {
   },
 
   methods: {
-    initialize() {
+    async initialize() {
+      const { uuid } = this
+
+      const options = {
+        method: 'GET',
+        url: `http://localhost:8080/agent/${uuid}`,
+        json: true
+      }
+
+      let agent
+      try {
+        agent = await request(options)
+      } catch (e) {
+        this.error = e.error.error
+        return
+      }
+
+      this.name = agent.name
+      this.hostname = agent.hostname
+      this.connected = agent.connected
+      this.pid = agent.pid
+
+      this.loadMetrics()
+    },
+
+    async loadMetrics () {
+      const { uuid } = this
+
+      const options = {
+        method: 'GET',
+        url: `http://localhost:8080/metrics/${uuid}`,
+        json: true
+      }
+
+      let metrics
+      try {
+        metrics = await request(options)
+      } catch (e) {
+        this.error = e.error.error
+        return
+      }
+
+      this.metrics = metrics
     },
 
     toggleMetrics() {

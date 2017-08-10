@@ -19,5 +19,9 @@
   "homepage": "https://github.com/platzi/platziverse#readme",
   "devDependencies": {
     "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.7.5"
   }
 }

@@ -18,12 +18,15 @@
 </style>
 
 <script>
+const io = require('socket.io-client')
+const socket = io()
 
 module.exports = {
   data () {
     return {
       agents: [],
-      error: null
+      error: null,
+      socket
     }
   },
 

@@ -34,7 +34,7 @@ module.exports = {
   components: {
     LineChart
   },
-  props: [ 'uuid', 'type' ],
+  props: [ 'uuid', 'type', 'socket' ],
 
   data() {
     return {
@@ -86,6 +86,43 @@ module.exports = {
           data
         }]
       }
+
+      this.startRealtime()
+    },
+
+    startRealtime () {
+      const { type, uuid, socket } = this
+
+      socket.on('agent/message', payload => {
+        if (payload.agent.uuid === uuid) {
+          const metric = payload.metrics.find(m => m.type === type)
+
+          // Copy current values
+          const labels = this.datacollection.labels
+          const data = this.datacollection.datasets[0].data
+
+          // Remove first element if length > 20
+          const length = labels.length || data.length
+
+          if (length >= 20) {
+            labels.shift()
+            data.shift()
+          }
+
+          // Add new elements
+          labels.push(moment(metric.createdAt).format('HH:mm:ss'))
+          data.push(metric.value)
+
+          this.datacollection = {
+            labels,
+            datasets: [{
+              backgroundColor: this.color,
+              label: type,
+              data
+            }]
+          }
+        }
+      })
     },
 
     handleError (err) {

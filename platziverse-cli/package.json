@@ -23,6 +23,7 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.7.5",
+    "moment": "^2.18.1",
     "platziverse-agent": "file:../platziverse-agent"
   }
 }

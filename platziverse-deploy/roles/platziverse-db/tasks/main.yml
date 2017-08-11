@@ -1,0 +1,14 @@
+---
+- include: deps.yml
+- name: Copy platziverse-db
+  copy:
+    src=platziverse-db
+    dest=/usr/local/src
+    mode=u=rwx,g=rwx,o=rx
+- name: Run npm install
+  command: npm install
+    chdir=/usr/local/src/platziverse-db
+    creates=/usr/local/src/platziverse-db/node_modules
+- name: Setup Database
+  command: npm run setup -- --yes
+    chdir=/usr/local/src/platziverse-db

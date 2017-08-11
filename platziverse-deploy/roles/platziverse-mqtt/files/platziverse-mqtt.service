@@ -1,0 +1,14 @@
+[Unit]
+Description=Platziverse MQTT
+After=network.target
+
+[Service]
+Environment=NODE_ENV=production
+Type=simple
+User=root
+WorkingDirectory=/usr/local/src/platziverse-mqtt
+ExecStart=/usr/bin/npm start
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

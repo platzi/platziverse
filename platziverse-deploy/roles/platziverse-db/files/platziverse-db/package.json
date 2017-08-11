@@ -1,0 +1,39 @@
+{
+  "name": "platziverse-db",
+  "version": "1.0.0",
+  "description": "A Simple IoT Platform - DB Module",
+  "main": "index.js",
+  "scripts": {
+    "test": "DEBUG=platziverse:* nyc --reporter=lcov ava tests/ --verbose",
+    "setup": "DEBUG=platziverse:* node setup.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platzi/platziverse.git"
+  },
+  "author": "Julian Duque <julianduquej@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/platzi/platziverse/issues"
+  },
+  "homepage": "https://github.com/platzi/platziverse#readme",
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "nyc": "^11.1.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^3.1.0",
+    "sqlite3": "^3.1.9",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "debug": "^2.6.8",
+    "defaults": "^1.0.3",
+    "inquirer": "^3.2.1",
+    "minimist": "^1.2.0",
+    "pg": "^7.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.4.2"
+  }
+}

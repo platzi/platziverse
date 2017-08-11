@@ -1,0 +1,41 @@
+{
+  "name": "platziverse-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Simple IoT Platform - API",
+  "main": "server.js",
+  "scripts": {
+    "test": "DEBUG=platziverse:* ava tests/ --verbose",
+    "start": "NODE_ENV=production node server.js",
+    "start-dev": "DEBUG=platziverse:* nodemon server.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platzi/platziverse.git"
+  },
+  "author": "Julian Duque <julianduquej@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/platzi/platziverse/issues"
+  },
+  "homepage": "https://github.com/platzi/platziverse#readme",
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "nodemon": "^1.11.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^3.1.0",
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "debug": "^3.0.0",
+    "express": "^4.15.4",
+    "express-asyncify": "^1.0.0",
+    "express-jwt": "^5.3.0",
+    "express-jwt-permissions": "^1.0.0",
+    "jsonwebtoken": "^7.4.2",
+    "platziverse-db": "file:../platziverse-db"
+  }
+}

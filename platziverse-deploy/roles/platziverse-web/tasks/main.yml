@@ -1,0 +1,28 @@
+---
+- include: deps.yml
+- name: Copying platziverse-web
+  copy:
+    src=platziverse-web
+    dest=/usr/local/src
+    mode=u=rwx,g=rwx,o=rx
+- name: Running npm install
+  command: npm install
+    chdir=/usr/local/src/platziverse-web
+    creates=/usr/local/src/platziverse-web/node_modules
+- name: Install systemd script
+  copy:
+    src=platziverse-web.service
+    dest=/lib/systemd/system
+- name: Install nginx config
+  copy:
+    src=platziverse-web.conf
+    dest=/etc/nginx/sites-enabled
+- name: Start platziverse-web
+  service:
+    name=platziverse-web
+    state=restarted
+    enabled=yes
+- name: Restart nginx
+  service:
+    name=nginx
+    state=reloaded

@@ -1,0 +1,11 @@
+---
+- include: deps.yml
+- name: Copy platziverse-agent
+  copy:
+    src=platziverse-agent
+    dest=/usr/local/src
+    mode=u=rwx,g=rwx,o=rx
+- name: Run npm install
+  command: npm install
+    chdir=/usr/local/src/platziverse-agent
+    creates=/usr/local/src/platziverse-agent/node_modules

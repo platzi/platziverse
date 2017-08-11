@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Platziverse - Simple IoT Platform</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700|Roboto:400,600,700" rel="stylesheet">
+  <style>
+    .header {
+      background: white;
+      height: 64px;
+      display: flex;
+      align-items: center;
+    }
+    .header-container {
+      max-width: 850px;
+      margin: 0 auto;
+      flex: 1;
+      padding: 0 15px;
+    }
+    @media screen and (min-width: 850px) {
+      .header-container {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <img src="/images/platziverse.png" width="185" height="38" alt="PlatziVerse">
+    </div>
+  </header>
+  <div id="app"></div>
+  <script type="text/javascript" src="/bundle.js"></script>
+</body>
+</html>

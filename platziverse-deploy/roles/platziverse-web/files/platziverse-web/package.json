@@ -1,0 +1,53 @@
+{
+  "name": "platziverse-web",
+  "version": "1.0.0",
+  "description": "A Simple IoT Platform - Web Dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "prestart": "npm run build",
+    "build": "NODE_ENV=production browserify -g envify -t babelify -t vueify client/app.js | uglifyjs -c -m -o public/bundle.js",
+    "start-dev": "DEBUG=platziverse:* nodemon server.js",
+    "prestart-dev": "npm run build-dev",
+    "build-dev": "browserify -g envify -t babelify -t vueify client/app.js -o public/bundle.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platzi/platziverse.git"
+  },
+  "author": "Julian Duque <julianduquej@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/platzi/platziverse/issues"
+  },
+  "homepage": "https://github.com/platzi/platziverse#readme",
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "envify": "^4.1.0",
+    "nodemon": "^1.11.0",
+    "standard": "^10.0.3",
+    "uglify-js": "^3.0.27",
+    "vueify": "^9.4.1"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "chart.js": "^2.6.0",
+    "debug": "^3.0.0",
+    "express": "^4.15.4",
+    "express-asyncify": "^1.0.0",
+    "moment": "^2.18.1",
+    "platziverse-agent": "file:../platziverse-agent",
+    "random-material-color": "^1.0.3",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
+    "vue": "^2.4.2",
+    "vue-chartjs": "^2.8.1"
+  }
+}

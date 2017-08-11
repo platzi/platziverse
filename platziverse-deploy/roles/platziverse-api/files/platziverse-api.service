@@ -1,0 +1,14 @@
+[Unit]
+Description=Plativerse API
+After=network.target
+
+[Service]
+Environment=NODE_ENV=production
+Type=simple
+User=root
+WorkingDirectory=/usr/local/src/platziverse-api
+ExecStart=/usr/bin/npm start
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

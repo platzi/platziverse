@@ -1,4 +1,4 @@
-postgresql_database:
+postgresql_databases:
   - name: platziverse
     owner: platzi
     hstore: yes
